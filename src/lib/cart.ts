@@ -56,7 +56,7 @@ export function discountCents(
 ): number {
   if (!coupon) return 0;
   if (coupon.type === "percent") {
-    return roundCents((subtotal * coupon.value) / 100);
+    return coupon.value * 100;
   }
   // fixed — cap at subtotal so discount never exceeds what's owed
   return Math.min(coupon.value, subtotal);

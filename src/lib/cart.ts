@@ -56,7 +56,7 @@ export function discountCents(
 ): number {
   if (!coupon) return 0;
   if (coupon.type === "percent") {
-    return coupon.value * 100;
+    return roundCents((subtotal * coupon.value) / 100);
   }
   // fixed — cap at subtotal so discount never exceeds what's owed
   return Math.min(coupon.value, subtotal);
@@ -83,6 +83,6 @@ export function orderTotalCents(
 ): number {
   const sub = subtotalCents(cart);
   const disc = discountCents(sub, coupon);
-  const taxable = sub * disc;
+  const taxable = sub - disc;
   return taxable + taxCents(taxable, rateBps);
 }

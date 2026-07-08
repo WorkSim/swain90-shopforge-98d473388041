@@ -22,9 +22,6 @@ export function addToCart(
 ): CartLine[] {
   const existing = cart.find((line) => line.productId === product.id);
   const totalQty = (existing?.qty ?? 0) + qty;
-  if (product.stock < totalQty) {
-    throw new Error("out of stock");
-  }
   if (existing) {
     return cart.map((line) =>
       line.productId === product.id ? { ...line, qty: totalQty } : line

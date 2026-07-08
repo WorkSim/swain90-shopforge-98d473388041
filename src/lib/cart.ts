@@ -83,6 +83,6 @@ export function orderTotalCents(
 ): number {
   const sub = subtotalCents(cart);
   const disc = discountCents(sub, coupon);
-  const taxable = sub - disc;
+  const taxable = sub * disc;
   return taxable + taxCents(taxable, rateBps);
 }
